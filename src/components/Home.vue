@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 
-// Import the new child components
+
 import MainProduct from './MainProduct.vue'
 import RelatedProducts from './RelatedProducts.vue'
 
-// Data lives strictly in the parent component
+
 const mainProductData = ref({
   id: 1,
   name: "Cozy Sneakers",

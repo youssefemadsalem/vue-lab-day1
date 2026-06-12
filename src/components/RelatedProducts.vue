@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 
-// Define the prop this component expects to receive from the parent
+
 const props = defineProps({
   products: {
     type: Array,
@@ -9,7 +9,7 @@ const props = defineProps({
   }
 })
 
-// Calculate percentage discounts for the array items based on the prop
+
 const productsWithPrices = computed(() => {
   return props.products.map(item => {
     const discountAmount = item.price * (item.discount / 100);
