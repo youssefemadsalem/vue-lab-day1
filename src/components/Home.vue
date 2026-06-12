@@ -1,36 +1,39 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// Data Shape (From Lab Requirements)
+
 const mainProduct = ref({
   id: 1,
   name: "Cozy Sneakers",
   description: "High-quality sneakers that go with everything you wear.",
-  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL2AsOBS5OCphlUDIgFfLSVx58mkYf5Uw7b4quxN12jw&s=10",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfrFEqDIL8NLQXflNotUOO6HAC06mIVpKZ-GhJvXL3hXq5B0Ta88Eyq_w&s=10",
   badge: "NEW",
   price: 120,
   discount: 20,
   tags: ["Fashion", "Casual", "Sport"],
-  isAvailable: true // Bonus Challenge
+  isAvailable: true 
 })
 
 const relatedProducts = ref([
-  { id: 2, name: "Running Shoes", price: 90, discount: 10, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL2AsOBS5OCphlUDIgFfLSVx58mkYf5Uw7b4quxN12jw&s=10" },
-  { id: 3, name: "Casual Boots", price: 150, discount: 0, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL2AsOBS5OCphlUDIgFfLSVx58mkYf5Uw7b4quxN12jw&s=10" },
-  { id: 4, name: "Flip Flops", price: 30, discount: 50, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL2AsOBS5OCphlUDIgFfLSVx58mkYf5Uw7b4quxN12jw&s=10" }
+  { id: 2, name: "Running Shoes", price: 90, discount: 10, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvquKtGe1ix78z_HYRPoArF-4pBltRtzenWGSzcvBRAw&s=10" },
+  { id: 3, name: "Casual Boots", price: 150, discount: 0, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcIVaAztfvSp7rkdy_GEQK1q4IxrJb50R1bIYQlZRE9m3LsHtcBQKFm8A&s=10" },
+  { id: 4, name: "Flip Flops", price: 30, discount: 50, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0U-C6JukbDrrp4UKzfy1zj6TwK0uSEcZOyUFt5K-x2Q&s=10" }
 ])
 
-// Computed Properties
+
 const discountedPrice = computed(() => {
-  return mainProduct.value.price - mainProduct.value.discount
+  const discountAmount = mainProduct.value.price * (mainProduct.value.discount / 100);
+  return mainProduct.value.price - discountAmount;
 })
 
-// Calculate discounts for the array items using computed to strictly follow the rules
 const relatedProductsWithPrices = computed(() => {
-  return relatedProducts.value.map(product => ({
-    ...product,
-    finalPrice: product.price - product.discount
-  }))
+  return relatedProducts.value.map(product => {
+    const discountAmount = product.price * (product.discount / 100);
+    return {
+      ...product,
+      finalPrice: product.price - discountAmount
+    }
+  })
 })
 </script>
 
@@ -60,9 +63,9 @@ const relatedProductsWithPrices = computed(() => {
 
         <div class="my-4">
           <span v-if="mainProduct.discount > 0" class="text-lg text-gray-400 line-through mr-2">
-            ${{ mainProduct.price }}
+            ${{ mainProduct.price.toFixed(2) }}
           </span>
-          <span class="text-3xl font-bold text-success">${{ discountedPrice }}</span>
+          <span class="text-3xl font-bold text-success">${{ discountedPrice.toFixed(2) }}</span>
         </div>
 
         <div class="card-actions justify-end mt-auto">
@@ -86,9 +89,9 @@ const relatedProductsWithPrices = computed(() => {
             
             <div>
                <span v-if="product.discount > 0" class="text-sm text-gray-400 line-through mr-2">
-                ${{ product.price }}
+                ${{ product.price.toFixed(2) }}
               </span>
-              <span class="font-bold text-lg">${{ product.finalPrice }}</span>
+              <span class="font-bold text-lg">${{ product.finalPrice.toFixed(2) }}</span>
             </div>
             
           </div>
