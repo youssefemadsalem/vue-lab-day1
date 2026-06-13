@@ -9,12 +9,10 @@ const products = ref([
   { id: 4, name: "Flip Flops", description: "Light and breezy for sunny days.", image: "https://via.placeholder.com/300", badge: "", price: 30, discount: 50, stock: 20, tags: ["Summer", "Casual"] }
 ])
 
-// Bonus: Calculate total stock live
 const totalStock = computed(() => {
   return products.value.reduce((total, product) => total + product.stock, 0)
 })
 
-// The central function to handle stock reduction
 const handleBuy = (productId) => {
   const product = products.value.find(p => p.id === productId)
   if (product && product.stock > 0) {

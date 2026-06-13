@@ -8,7 +8,6 @@ const props = defineProps({
   }
 })
 
-// Define the emit to send data UP
 const emit = defineEmits(['buy'])
 
 const discountedPrice = computed(() => {
