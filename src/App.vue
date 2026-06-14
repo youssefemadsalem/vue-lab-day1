@@ -1,17 +1,16 @@
 <script setup>
-import Header from './components/Header.vue'
-import Footer from './components/Footer.vue'
-import Home from './components/Home.vue'
+import { onMounted, onUnmounted } from 'vue'
+import NavBar from './components/NavBar.vue'
+
+onMounted(() => console.log('App mounted'))
+onUnmounted(() => console.log('App unmounted'))
 </script>
 
 <template>
   <div class="min-h-screen flex flex-col">
-    <Header />
-    
-    <main class="grow container mx-auto p-4">
-      <Home />
+    <NavBar />
+    <main class="grow container mx-auto p-4 mt-6">
+      <router-view />
     </main>
-
-    <Footer />
   </div>
 </template>
